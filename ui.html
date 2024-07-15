@@ -1,0 +1,25 @@
+<h2>Create named frames</h2>
+<p>List: <input id="listNamesId" placeholder="item1, item2, ..."></p>
+<p>Width: <input id="frameWidthId" placeholder="in px"></p>
+<p>Height: <input id="frameHeightId" placeholder="in px"></p>
+<button id="create">Create</button>
+<button id="cancel">Cancel</button>
+<script>
+
+  document.getElementById('create').onclick = () => {
+    const listElement = document.getElementById('listNamesId');
+    const widthElement = document.getElementById('frameWidthId');
+    const heightElement = document.getElementById('frameHeightId');
+
+    const list = (listElement.value).split(', ');
+    const width = parseInt(widthElement.value);
+    const height = parseInt(heightElement.value);
+
+    parent.postMessage({pluginMessage: {type: 'create-named-frames', width, height, list}}, '*')
+  }
+
+  document.getElementById('cancel').onclick = () => {
+    parent.postMessage({pluginMessage: {type: 'cancel'}}, '*')
+  }
+
+</script>
